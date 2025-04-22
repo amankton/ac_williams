@@ -94,7 +94,7 @@
             justify-content: center;
             height: 100vh;
             width: 100vw;
-            padding: calc(2rem * var(--spacing-scale)) calc(2rem * var(--spacing-scale)) calc(6rem * var(--spacing-scale)); /* Increased bottom padding */
+            padding: calc(2rem * var(--spacing-scale)) calc(5rem * var(--spacing-scale)); /* Increased side padding for navigation buttons */
             box-sizing: border-box;
             position: absolute;
             top: 0;
@@ -220,40 +220,43 @@
             color: white;
         }
 
-        .navigation {
-            position: fixed;
-            bottom: calc(3.5rem * var(--spacing-scale)); /* Increased from 2rem to 3.5rem (about half an inch more) */
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: calc(1.5rem * var(--spacing-scale));
-            z-index: 1000; /* Higher z-index to ensure it's always visible */
-            background-color: rgba(0, 0, 0, 0.2); /* Subtle background for better visibility */
-            padding: calc(0.75rem * var(--spacing-scale)) calc(1.5rem * var(--spacing-scale));
-            border-radius: 2rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
+        /* Side navigation buttons */
         .nav-btn {
-            background: rgba(79, 70, 229, 0.8);
+            background: rgba(79, 70, 229, 0.9);
             border: 2px solid white;
             color: white;
-            width: calc(50px * var(--spacing-scale));
-            height: calc(50px * var(--spacing-scale));
+            width: calc(60px * var(--spacing-scale));
+            height: calc(60px * var(--spacing-scale));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            font-size: calc(1rem * var(--content-scale));
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            font-size: calc(1.2rem * var(--content-scale));
+            position: fixed;
+            z-index: 1000; /* Higher z-index to ensure it's always visible */
+            opacity: 0.8;
         }
 
         .nav-btn:hover {
             background: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+            opacity: 1;
+        }
+
+        #prevBtn {
+            left: calc(2rem * var(--spacing-scale));
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        #nextBtn {
+            right: calc(2rem * var(--spacing-scale));
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         .slide-indicators {
@@ -1638,14 +1641,13 @@
 
     </div><!-- End of slides-container -->
 
-    <div class="navigation">
-        <button class="nav-btn" id="prevBtn" aria-label="Previous slide">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-        <button class="nav-btn" id="nextBtn" aria-label="Next slide">
-            <i class="fas fa-chevron-right"></i>
-        </button>
-    </div>
+    <!-- Side navigation buttons -->
+    <button class="nav-btn" id="prevBtn" aria-label="Previous slide">
+        <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="nav-btn" id="nextBtn" aria-label="Next slide">
+        <i class="fas fa-chevron-right"></i>
+    </button>
 
     <!-- Progress is shown in the top bar -->
 
