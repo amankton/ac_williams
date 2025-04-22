@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="NFLUENCY AI Solutions for AC WILLIAM - Transforming Fashion Through AI with innovative business solutions.">
+    <title>NFLUENCY AI Solutions for AC WILLIAM</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap');
+
+        :root {
+            --primary: #4F46E5;
+            --secondary: #EC4899;
+            --accent: #8B5CF6;
+            --dark: #1F2937;
+            --light: #F9FAFB;
+            --header-scale: 1;
+            --content-scale: 1;
+            --spacing-scale: 1;
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --header-scale: 0.85;
+                --content-scale: 0.9;
+                --spacing-scale: 0.8;
+            }
+        }
+
+        @media (max-width: 480px) {
+            :root {
+                --header-scale: 0.7;
+                --content-scale: 0.8;
+                --spacing-scale: 0.7;
+            }
+        }
+
+        /* Custom scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #8b5cf6, #a855f7);
+            border-radius: 6px;
+            border: 2px solid transparent;
+            background-clip: content-box;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #9f75ff, #b66dff);
+            border: 2px solid transparent;
+            background-clip: content-box;
+        }
+
+        /* Firefox scrollbar */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #8b5cf6 rgba(0, 0, 0, 0.1);
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            position: fixed;
+            touch-action: pan-y;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            margin: 0;
+            padding: 0;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+            width: 100vw;
+            padding: calc(2rem * var(--spacing-scale)) calc(2rem * var(--spacing-scale)) calc(6rem * var(--spacing-scale)); /* Increased bottom padding */
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 1;
+        }
+
+        /* Transition Effects */
+
+        /* Fade transition */
+        .transition-fade .slide {
+            transform: scale(1);
+            opacity: 0;
+        }
+
+        .transition-fade .slide.active {
+            opacity: 1;
+        }
+
+        /* Slide from right transition */
+        .transition-slide-right .slide {
+            transform: translateX(200px);
+            opacity: 0;
+        }
+
+        .transition-slide-right .slide.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        /* Slide from left transition */
+        .transition-slide-left .slide {
+            transform: translateX(-200px);
+            opacity: 0;
+        }
+
+        .transition-slide-left .slide.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        /* Slide up transition */
+        .transition-slide-up .slide {
+            transform: translateY(200px);
+            opacity: 0;
+        }
+
+        .transition-slide-up .slide.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Slide down transition */
+        .transition-slide-down .slide {
+            transform: translateY(-200px);
+            opacity: 0;
+        }
+
+        .transition-slide-down .slide.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Zoom in transition */
+        .transition-zoom-in .slide {
+            transform: scale(0.5);
+            opacity: 0;
+        }
+
+        .transition-zoom-in .slide.active {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* Zoom out transition */
+        .transition-zoom-out .slide {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+
+        .transition-zoom-out .slide.active {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* Flip transition */
+        .transition-flip .slide {
+            transform: perspective(1000px) rotateY(40deg);
+            opacity: 0;
+        }
+
+        .transition-flip .slide.active {
+            transform: perspective(1000px) rotateY(0);
+            opacity: 1;
+        }
+
+        .slide-content {
+            max-width: min(1200px, 95vw);
+            margin: 0 auto;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: calc(2rem * var(--spacing-scale));
+            margin-top: calc(-2rem * var(--spacing-scale)); /* Responsive negative margin */
+            overflow-y: auto; /* Allow scrolling on very small screens if needed */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+            scrollbar-width: thin; /* Firefox */
+            scrollbar-color: #8b5cf6 rgba(0, 0, 0, 0.1); /* Firefox */
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: calc(3.5rem * var(--spacing-scale)); /* Increased from 2rem to 3.5rem (about half an inch more) */
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: calc(1.5rem * var(--spacing-scale));
+            z-index: 1000; /* Higher z-index to ensure it's always visible */
+            background-color: rgba(0, 0, 0, 0.2); /* Subtle background for better visibility */
+            padding: calc(0.75rem * var(--spacing-scale)) calc(1.5rem * var(--spacing-scale));
+            border-radius: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-btn {
+            background: rgba(79, 70, 229, 0.8);
+            border: 2px solid white;
+            color: white;
+            width: calc(50px * var(--spacing-scale));
+            height: calc(50px * var(--spacing-scale));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: calc(1rem * var(--content-scale));
+        }
+
+        .nav-btn:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .slide-indicators {
+            position: fixed;
+            bottom: 5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 100;
+            margin-top: 1rem;
+        }
+
+        .transition-selector {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .transition-selector select {
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            border: 1px solid #ccc;
+            background: white;
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 0.25rem;
+            cursor: pointer;
+        }
+
+        .transition-selector label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        progress {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 12px;
+            border: none;
+            display: block;
+        }
+
+        progress::-webkit-progress-bar {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        progress::-webkit-progress-value {
+            background: linear-gradient(90deg, #8b5cf6, #a855f7); /* More purple gradient */
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.5); /* Purple glow */
+        }
+
+        progress::-moz-progress-bar {
+            background: linear-gradient(90deg, #8b5cf6, #a855f7); /* More purple gradient */
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.5); /* Purple glow */
+        }
+
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; /* Higher z-index to ensure it's always visible */
+            padding: 0;
+            margin: 0;
+            height: 12px; /* Match progress bar height */
+            background-color: rgba(0, 0, 0, 0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            pointer-events: none; /* Allow clicks to pass through */
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1.25rem; /* Reduced padding */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            height: auto; /* Changed from 100% to auto */
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1.5rem;
+            border-left: 2px solid var(--primary);
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -0.5rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: var(--primary);
+        }
+
+        .accent-text {
+            color: var(--accent);
+        }
+
+        .primary-text {
+            color: var(--primary);
+        }
+
+        .secondary-text {
+            color: var(--secondary);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: #3730A3;
+            transform: translateY(-2px);
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        @media print {
+            .slide {
+                display: flex;
+                page-break-after: always;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .navigation, .progress-bar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="transition-fade"><!-- Fade transition is hard-coded as default -->
+    <div class="progress-container">
+        <progress id="progressBar" value="0" max="100"></progress>
+    </div>
+
+    <!-- Fade transition is hard-coded as the default effect -->
+
+    <div class="slides-container" style="position: relative; width: 100vw; height: 100vh; overflow: hidden;">
+
+    <!-- Slide 1: Cover -->
+    <section class="slide active gradient-bg" id="slide1" aria-label="Cover slide">
+        <div class="slide-content">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">NFLUENCY</h1>
+                <p class="text-xl md:text-2xl mb-8">AI Business Solutions</p>
+                <div class="w-24 h-1 bg-white mx-auto mb-8"></div>
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">Transforming Fashion Through AI</h2>
+                <p class="text-xl md:text-2xl mb-12">A Proposal for AC WILLIAM</p>
+                <p class="text-lg italic">April 2025</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: About NFLUENCY -->
+    <div class="slide" id="slide2">
+        <div class="slide-content">
+            <div class="mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">About <span class="primary-text">NFLUENCY</span></h2>
+                <div class="w-24 h-1 bg-indigo-600 mb-8"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4">Who We Are</h3>
+                    <p class="text-lg mb-6">NFLUENCY specializes in AI-powered business solutions that transform how fashion brands automate processes and market their unique products.</p>
+                    <p class="text-lg">We blend cutting-edge technology with creative strategy to help visionary designers like you reach new heights.</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4">Our Expertise</h3>
+                    <ul class="space-y-3 text-lg">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                            <span>AI-powered marketing automation</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                            <span>Smart content creation & distribution</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                            <span>Data-driven customer engagement</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                            <span>E-commerce optimization</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                            <span>Business process automation</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <p class="text-xl font-semibold italic">"Leveraging AI to amplify human creativity and business potential"</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Understanding AC WILLIAM -->
+    <div class="slide" id="slide3">
+        <div class="slide-content">
+            <div class="mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Understanding <span class="secondary-text">AC WILLIAM</span></h2>
+                <div class="w-24 h-1 bg-pink-500 mb-8"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4">Your Inspiring Journey</h3>
+                    <p class="text-lg mb-4">As a cancer survivor who battled Multiple Myeloma, you transformed personal adversity into creative purpose, developing designs that uplift and empower women.</p>
+                    <p class="text-lg mb-4">Your journey through treatment and stem cell transplant at City of Hope inspired the creation of transformational fashion pieces that embody both style and hope.</p>
+                    <p class="text-lg">Your mother's elegant style from the 60s and 70s, combined with your early experiments with fashion, have shaped your unique design aesthetic.</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4">Your Brand Values</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="feature-card">
+                            <div class="text-center mb-3">
+                                <i class="fas fa-sync-alt text-3xl text-indigo-600"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold mb-2 text-center">Transformation</h4>
+                            <p class="text-center">Clothing that adapts to different occasions and styles</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="text-center mb-3">
+                                <i class="fas fa-bullseye text-3xl text-pink-500"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold mb-2 text-center">Purpose</h4>
+                            <p class="text-center">Fashion with meaning beyond aesthetics</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="text-center mb-3">
+                                <i class="fas fa-arrow-up text-3xl text-purple-500"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold mb-2 text-center">Positive Change</h4>
+                            <p class="text-center">Creating impact through innovative design</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="text-center mb-3">
+                                <i class="fas fa-heart text-3xl text-red-500"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold mb-2 text-center">Hope</h4>
+                            <p class="text-center">Inspiring confidence and possibility</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Your Unique Product -->
+    <div class="slide" id="slide4">
+        <div class="slide-content">
+            <div class="mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Your <span class="accent-text">Unique Product</span></h2>
+                <div class="w-24 h-1 bg-purple-500 mb-8"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4">Transformational Fashion</h3>
+                    <p class="text-lg mb-4">AC WILLIAM's designs stand out in the market with clothing items that can be worn in 6-10 different ways, offering unmatched versatility.</p>
+                    <p class="text-lg mb-4">Each piece transforms into multiple styles: from dresses to tops, from long-sleeve to short-sleeve looks, paired with various accessories.</p>
+                    <p class="text-lg">This revolutionary approach to fashion addresses multiple consumer needs:</p>
+                    <ul class="space-y-2 mt-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
+                            <span>Travel convenience with fewer packed items</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
+                            <span>Sustainable wardrobes with fewer total garments</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
+                            <span>Budget-friendly fashion with multiple looks per purchase</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
+                            <span>Easy-care convenience (wash, dry, and go)</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4">Customer Response</h3>
+                    <div class="space-y-4">
+                        <div class="feature-card">
+                            <div class="flex items-center mb-2">
+                                <div class="text-yellow-400 flex">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="ml-2 font-semibold">5.0</span>
+                            </div>
+                            <p class="italic mb-2">"I'm a seasoned woman but this dress is for all ages. I love it so much! It's my go-to forever. Every woman needs this in her closet."</p>
+                            <p class="font-semibold">- Denise T.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="flex items-center mb-2">
+                                <div class="text-yellow-400 flex">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="ml-2 font-semibold">5.0</span>
+                            </div>
+                            <p class="italic mb-2">"I absolutely love my dress! I went to New York for a week and I didn't have to pack much like I normally do. I am amazed how many ways you can wear this dress. Thanks AC, you're a genius!"</p>
+                            <p class="font-semibold">- Helen</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Market Opportunity -->
+    <div class="slide" id="slide5">
+        <div class="slide-content">
+            <div class="mt-12 mb-6"> <!-- Added top margin to push title down and reduced bottom margin -->
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Market <span class="primary-text">Opportunity</span></h2>
+                <div class="w-24 h-1 bg-indigo-600 mb-6"></div> <!-- Reduced bottom margin -->
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6"> <!-- Reduced gap -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-3">Growing Consumer Trends</h3> <!-- Reduced text size and margin -->
+                    <div class="space-y-3"> <!-- Reduced spacing between items -->
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-indigo-100 p-2 rounded-full mr-3"> <!-- Reduced padding and margin -->
+                                <i class="fas fa-leaf text-indigo-600 text-lg"></i> <!-- Reduced icon size -->
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-0.5">Sustainability Focus</h4> <!-- Reduced text size and margin -->
+                                <p class="text-sm">Consumers increasingly seek more value from fewer garments, reducing overall consumption.</p> <!-- Added text-sm -->
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-indigo-100 p-2 rounded-full mr-3"> <!-- Reduced padding and margin -->
+                                <i class="fas fa-minus text-indigo-600 text-lg"></i> <!-- Reduced icon size -->
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-0.5">Minimalism Movement</h4> <!-- Reduced text size and margin -->
+                                <p class="text-sm">Growing interest in capsule wardrobes and multi-functional pieces that maximize value.</p> <!-- Added text-sm -->
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-indigo-100 p-2 rounded-full mr-3"> <!-- Reduced padding and margin -->
+                                <i class="fas fa-dollar-sign text-indigo-600 text-lg"></i> <!-- Reduced icon size -->
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-0.5">Economic Factors</h4> <!-- Reduced text size and margin -->
+                                <p class="text-sm">Budget-conscious shoppers looking for versatility and long-term value in their purchases.</p> <!-- Added text-sm -->
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-indigo-100 p-2 rounded-full mr-3"> <!-- Reduced padding and margin -->
+                                <i class="fas fa-plane text-indigo-600 text-lg"></i> <!-- Reduced icon size -->
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-0.5">Travel Resurgence</h4> <!-- Reduced text size and margin -->
+                                <p class="text-sm">Demand for packable, versatile travel wardrobe solutions as travel continues to rebound.</p> <!-- Added text-sm -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-3">Market Size & Growth Potential</h3> <!-- Reduced text size and margin -->
+                    <div class="grid grid-cols-1 gap-4"> <!-- Reduced gap -->
+                        <div class="stat-card py-3 px-4"> <!-- Added custom padding to make cards more compact -->
+                            <h4 class="text-base font-semibold mb-1">Sustainable Fashion Market</h4> <!-- Reduced text size and margin -->
+                            <div class="stat-value text-3xl">$9.8B</div> <!-- Reduced text size -->
+                            <p class="text-gray-600 text-sm">Annual growth rate: 11.2%</p> <!-- Added text-sm -->
+                        </div>
+
+                        <div class="stat-card py-3 px-4"> <!-- Added custom padding to make cards more compact -->
+                            <h4 class="text-base font-semibold mb-1">Travel Apparel Segment</h4> <!-- Reduced text size and margin -->
+                            <div class="stat-value text-3xl">$4.3B</div> <!-- Reduced text size -->
+                            <p class="text-gray-600 text-sm">Annual growth rate: 8.7%</p> <!-- Added text-sm -->
+                        </div>
+
+                        <div class="stat-card py-3 px-4"> <!-- Added custom padding to make cards more compact -->
+                            <h4 class="text-base font-semibold mb-1">Multi-functional Fashion</h4> <!-- Reduced text size and margin -->
+                            <div class="stat-value text-3xl">$2.6B</div> <!-- Reduced text size -->
+                            <p class="text-gray-600 text-sm">Annual growth rate: 14.5%</p> <!-- Added text-sm -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Your Current Challenges -->
+    <div class="slide" id="slide6">
+        <div class="slide-content">
+            <div class="mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Current <span class="secondary-text">Challenges</span></h2>
+                <div class="w-24 h-1 bg-pink-500 mb-8"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="feature-card">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-eye text-3xl text-pink-500"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-center">Visibility</h3>
+                    <p class="text-center mb-3">Demonstrating the transformational nature of designs in a digital environment</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs text-pink-500 mt-1.5 mr-2"></i>
+                            <span>Difficulty showing multiple transformations in static images</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs text-pink-500 mt-1.5 mr-2"></i>
+                            <span>Limited reach across digital platforms</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-bullhorn text-3xl text-pink-500"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-center">Marketing</h3>
+                    <p class="text-center mb-3">Effectively communicating unique value proposition at scale</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs text-pink-500 mt-1.5 mr-2"></i>
+                            <span>Resource-intensive content creation needs</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs text-pink-500 mt-1.5 mr-2"></i>
+                            <span>Customer education on transformation techniques</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-chart-line text-3xl text-pink-500"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-center">Scaling</h3>
+                    <p class="text-center mb-3">Managing business growth efficiently while maintaining quality</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs text-pink-500 mt-1.5 mr-2"></i>
+                            <span>Manual processes limiting growth potential</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs text-pink-500 mt-1.5 mr-2"></i>
+                            <span>Personalization at scale challenges</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center">
+                <p class="text-xl italic">These challenges present opportunities for AI-powered solutions to transform your business operations and customer experience.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Our AI Solutions -->
+    <div class="slide" id="slide7">
+        <div class="slide-content">
+            <div class="mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Our AI <span class="primary-text">Solutions</span></h2>
+                <div class="w-24 h-1 bg-indigo-600 mb-8"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4">AI-Powered Marketing</h3>
+
+                    <div class="space-y-4">
+                        <div class="feature-card">
+                            <h4 class="text-xl font-semibold mb-2">Automated Content Creation</h4>
+                            <p class="mb-3">AI-generated video demonstrations of clothing transformations across platforms.</p>
+                            <p class="text-sm text-indigo-600 font-semibold">Solving: Manual content creation bottlenecks</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <h4 class="text-xl font-semibold mb-2">Personalized Marketing</h4>
+                            <p class="mb-3">AI-driven customer segmentation and personalized messaging based on preferences and behaviors.</p>
+                            <p class="text-sm text-indigo-600 font-semibold">Solving: One-size-fits-all marketing approach</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <h4 class="text-xl font-semibold mb-2">Smart Social Media Strategy</h4>
+                            <p class="mb-3">AI analytics to identify optimal posting times, content types, and audience targeting.</p>
+                            <p class="text-sm text-indigo-600 font-semibold">Solving: Low engagement and reach</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4">AI-Powered Business Operations</h3>
+
+                    <div class="space-y-4">
+                        <div class="feature-card">
+                            <h4 class="text-xl font-semibold mb-2">Virtual Try-On Technology</h4>
+                            <p class="mb-3">AI-enabled virtual fitting room allowing customers to visualize different transformations of your designs.</p>
+                            <p class="text-sm text-indigo-600 font-semibold">Solving: Difficulty demonstrating versatility</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <h4 class="text-xl font-semibold mb-2">Automated Customer Support</h4>
+                            <p class="mb-3">AI chatbot providing styling advice and transformation guidance for customers.</p>
+                            <p class="text-sm text-indigo-600 font-semibold">Solving: Customer education challenges</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <h4 class="text-xl font-semibold mb-2">Inventory & Demand Forecasting</h4>
+                            <p class="mb-3">AI prediction models to optimize inventory management and production planning.</p>
+                            <p class="text-sm text-indigo-600 font-semibold">Solving: Inventory inefficiencies</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Tailored Marketing Strategy -->
+    <div class="slide" id="slide8">
+        <div class="slide-content">
+            <div class="mt-12 mb-8"> <!-- Added top margin to push title down -->
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Tailored <span class="accent-text">Marketing Strategy</span></h2>
+                <div class="w-24 h-1 bg-purple-500 mb-8"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6"> <!-- Reduced gap and bottom margin -->
+                <div class="feature-card py-3 px-3"> <!-- Added custom padding to make cards more compact -->
+                    <div class="text-center mb-2"> <!-- Reduced margin -->
+                        <i class="fas fa-book-open text-2xl text-purple-500"></i> <!-- Reduced icon size -->
+                    </div>
+                    <h3 class="text-lg font-semibold mb-1 text-center">Brand Storytelling</h3> <!-- Reduced text size and margin -->
+                    <p class="text-center text-sm">AI-enhanced narratives highlighting your cancer survivor journey and transformation message</p> <!-- Added text-sm -->
+                </div>
+
+                <div class="feature-card py-3 px-3"> <!-- Added custom padding to make cards more compact -->
+                    <div class="text-center mb-2"> <!-- Reduced margin -->
+                        <i class="fas fa-video text-2xl text-purple-500"></i> <!-- Reduced icon size -->
+                    </div>
+                    <h3 class="text-lg font-semibold mb-1 text-center">Visual Demonstration</h3> <!-- Reduced text size and margin -->
+                    <p class="text-center text-sm">AI-generated videos showcasing multiple transformations of each design</p> <!-- Added text-sm -->
+                </div>
+
+                <div class="feature-card py-3 px-3"> <!-- Added custom padding to make cards more compact -->
+                    <div class="text-center mb-2"> <!-- Reduced margin -->
+                        <i class="fas fa-bullseye text-2xl text-purple-500"></i> <!-- Reduced icon size -->
+                    </div>
+                    <h3 class="text-lg font-semibold mb-1 text-center">Targeted Reach</h3> <!-- Reduced text size and margin -->
+                    <p class="text-center text-sm">AI-powered audience targeting to connect with ideal customers</p> <!-- Added text-sm -->
+                </div>
+
+                <div class="feature-card py-3 px-3"> <!-- Added custom padding to make cards more compact -->
+                    <div class="text-center mb-2"> <!-- Reduced margin -->
+                        <i class="fas fa-users text-2xl text-purple-500"></i> <!-- Reduced icon size -->
+                    </div>
+                    <h3 class="text-lg font-semibold mb-1 text-center">Community Building</h3> <!-- Reduced text size and margin -->
+                    <p class="text-center text-sm">AI-facilitated community engagement to create brand advocates</p> <!-- Added text-sm -->
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6"> <!-- Reduced gap -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-3">Social Media Strategy</h3> <!-- Reduced text size and margin -->
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fab fa-instagram text-xl text-purple-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Instagram</h4>
+                                <ul class="space-y-1 mt-2">
+                                    <li class="flex items-start text-sm">
+                                        <i class="fas fa-circle text-xs text-purple-500 mt-1 mr-2"></i>
+                                        <span>AI-generated transformation reels with trending audio</span>
+                                    </li>
+                                    <li class="flex items-start text-sm">
+                                        <i class="fas fa-circle text-xs text-purple-500 mt-1 mr-2"></i>
+                                        <span>Lifestyle imagery with real customers</span>
+                                    </li>
+                                    <li class="flex items-start text-sm">
+                                        <i class="fas fa-circle text-xs text-purple-500 mt-1 mr-2"></i>
+                                        <span>Behind-the-scenes design content</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fab fa-tiktok text-xl text-purple-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">TikTok</h4>
+                                <ul class="space-y-1 mt-2">
+                                    <li class="flex items-start text-sm">
+                                        <i class="fas fa-circle text-xs text-purple-500 mt-1 mr-2"></i>
+                                        <span>Quick transformation videos with trending sounds</span>
+                                    </li>
+                                    <li class="flex items-start text-sm">
+                                        <i class="fas fa-circle text-xs text-purple-500 mt-1 mr-2"></i>
+                                        <span>Styling challenges and tutorials</span>
+                                    </li>
+                                    <li class="flex items-start text-sm">
+                                        <i class="fas fa-circle text-xs text-purple-500 mt-1 mr-2"></i>
+                                        <span>Customer transformation submissions</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-3">AI-Enhanced Content Plan</h3> <!-- Reduced text size and margin -->
+                    <div class="space-y-4">
+                        <div class="feature-card py-3 px-3"> <!-- Added custom padding to make cards more compact -->
+                            <h4 class="text-lg font-semibold mb-1">Video Content Series</h4> <!-- Reduced text size and margin -->
+                            <ul class="space-y-1">
+                                <li class="flex items-start text-sm">
+                                    <i class="fas fa-circle text-xs text-purple-500 mt-1 mr-2"></i>
+                                    <span>AI-generated transformation tutorials for each style variation</span>
+                                </li>
+                                <li class="flex items-start text-sm">
+                                    <i class="fas fa-circle text-xs text-purple-500 mt-1 mr-2"></i>
+                                    <span>Occasion mapping: how one dress serves multiple event needs</span>
+                                </li>
+                                <li class="flex items-start text-sm">
+                                    <i class="fas fa-circle text-xs text-purple-500 mt-1 mr-2"></i>
+                                    <span>Your inspirational story and design philosophy</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="feature-card py-3 px-3"> <!-- Added custom padding to make cards more compact -->
+                            <h4 class="text-lg font-semibold mb-1">Website & E-commerce Optimization</h4> <!-- Reduced text size and margin -->
+                            <ul class="space-y-1">
+                                <li class="flex items-start text-sm">
+                                    <i class="fas fa-circle text-xs text-purple-500 mt-1 mr-2"></i>
+                                    <span>AI-powered product photography showing all transformations</span>
+                                </li>
+                                <li class="flex items-start text-sm">
+                                    <i class="fas fa-circle text-xs text-purple-500 mt-1 mr-2"></i>
+                                    <span>Virtual try-on technology for customer engagement</span>
+                                </li>
+                                <li class="flex items-start text-sm">
+                                    <i class="fas fa-circle text-xs text-purple-500 mt-1 mr-2"></i>
+                                    <span>Personalized shopping experiences based on preferences</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Implementation Timeline -->
+    <div class="slide" id="slide9">
+        <div class="slide-content">
+            <div class="mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Implementation <span class="primary-text">Timeline</span></h2>
+                <div class="w-24 h-1 bg-indigo-600 mb-8"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <div class="timeline-item pb-6">
+                        <h3 class="text-2xl font-semibold mb-2">Phase 1: Foundation</h3>
+                        <p class="text-gray-600 mb-3">Month 1-2</p>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                                <span>Complete brand audit and AI strategy development</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                                <span>Set up AI content generation infrastructure</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                                <span>Create initial batch of AI-enhanced visual assets</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                                <span>Establish baseline metrics and tracking systems</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item pb-6">
+                        <h3 class="text-2xl font-semibold mb-2">Phase 2: Launch</h3>
+                        <p class="text-gray-600 mb-3">Month 2-3</p>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                                <span>Implement AI-powered social media refresh</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                                <span>Deploy virtual try-on technology on website</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                                <span>Launch AI-driven ad campaigns with A/B testing</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                                <span>Initiate automated email marketing sequences</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="timeline-item pb-6">
+                        <h3 class="text-2xl font-semibold mb-2">Phase 3: Growth</h3>
+                        <p class="text-gray-600 mb-3">Month 3-6</p>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                                <span>Analyze AI-gathered performance data and optimize</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                                <span>Scale successful AI-driven marketing campaigns</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                                <span>Implement customer advocacy automation program</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                                <span>Refine AI inventory management system</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3 class="text-2xl font-semibold mb-2">Phase 4: Expansion</h3>
+                        <p class="text-gray-600 mb-3">Month 6-12</p>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                                <span>Introduce new AI-created content themes and campaigns</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                                <span>Explore AI-identified retail partnership opportunities</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                                <span>Develop cross-promotion strategies with complementary brands</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                                <span>Plan AI-optimized seasonal collection marketing</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Expected Results -->
+    <div class="slide" id="slide10">
+        <div class="slide-content">
+            <div class="mt-12 mb-8"> <!-- Added top margin to push title down -->
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Expected <span class="secondary-text">Results</span></h2>
+                <div class="w-24 h-1 bg-pink-500 mb-8"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div>
+                    <div class="stat-card h-full">
+                        <h3 class="text-xl font-semibold mb-3">3-Month Milestones</h3>
+                        <ul class="space-y-3 text-left">
+                            <li class="flex items-center justify-between">
+                                <span>Social Media Engagement</span>
+                                <span class="font-bold text-pink-600">+150%</span>
+                            </li>
+                            <li class="flex items-center justify-between">
+                                <span>Website Traffic</span>
+                                <span class="font-bold text-pink-600">+75%</span>
+                            </li>
+                            <li class="flex items-center justify-between">
+                                <span>Conversion Rate</span>
+                                <span class="font-bold text-pink-600">+40%</span>
+                            </li>
+                            <li class="flex items-center justify-between">
+                                <span>Influencer Content</span>
+                                <span class="font-bold text-pink-600">30+ pieces</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="stat-card h-full">
+                        <h3 class="text-xl font-semibold mb-3">6-Month Milestones</h3>
+                        <ul class="space-y-3 text-left">
+                            <li class="flex items-center justify-between">
+                                <span>Social Followers</span>
+                                <span class="font-bold text-pink-600">+200%</span>
+                            </li>
+                            <li class="flex items-center justify-between">
+                                <span>Email Subscribers</span>
+                                <span class="font-bold text-pink-600">+100%</span>
+                            </li>
+                            <li class="flex items-center justify-between">
+                                <span>Average Order Value</span>
+                                <span class="font-bold text-pink-600">+60%</span>
+                            </li>
+                            <li class="flex items-center justify-between">
+                                <span>Repeat Customer Rate</span>
+                                <span class="font-bold text-pink-600">+50%</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="stat-card h-full">
+                        <h3 class="text-xl font-semibold mb-3">12-Month Projections</h3>
+                        <ul class="space-y-3 text-left">
+                            <li class="flex items-center justify-between">
+                                <span>Total Revenue</span>
+                                <span class="font-bold text-pink-600">+300%</span>
+                            </li>
+                            <li class="flex items-center justify-between">
+                                <span>Category Leadership</span>
+                                <span class="font-bold text-pink-600">Established</span>
+                            </li>
+                            <li class="flex items-center justify-between">
+                                <span>Brand Signature</span>
+                                <span class="font-bold text-pink-600">Recognized</span>
+                            </li>
+                            <li class="flex items-center justify-between">
+                                <span>Product Line</span>
+                                <span class="font-bold text-pink-600">Expanded</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4">Investment and Returns</h3>
+                    <div class="feature-card">
+                        <div class="mb-4">
+                            <h4 class="text-xl font-semibold mb-2">Marketing Budget Allocation</h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <p class="font-semibold">AI Content Production</p>
+                                    <p>35%</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Paid Media</p>
+                                    <p>30%</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Influencer Partnerships</p>
+                                    <p>20%</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Technology & Analytics</p>
+                                    <p>15%</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xl font-semibold mb-2">Return on Investment</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-center justify-between">
+                                    <span>Expected ROI</span>
+                                    <span class="font-bold text-indigo-600">300% within 12 months</span>
+                                </li>
+                                <li class="flex items-center justify-between">
+                                    <span>Breakeven Point</span>
+                                    <span class="font-bold text-indigo-600">Month 4</span>
+                                </li>
+                                <li class="flex items-center justify-between">
+                                    <span>Customer Acquisition Cost</span>
+                                    <span class="font-bold text-indigo-600">Decreasing by 35% by Month 6</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4">Why NFLUENCY?</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-tshirt text-xl text-indigo-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Fashion + AI Expertise</h4>
+                                <p>Specialized experience in applying AI solutions to fashion industry challenges.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-robot text-xl text-indigo-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">AI-Powered Content Creation</h4>
+                                <p>Our proprietary AI tools can showcase your transformational designs in ways manual production cannot.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-chart-pie text-xl text-indigo-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Data-Driven Approach</h4>
+                                <p>AI-powered analytics ensuring measurable results and continuous optimization.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-puzzle-piece text-xl text-indigo-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold">Complete Solution</h4>
+                                <p>End-to-end AI business services from strategy to execution, allowing you to focus on design.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11: AC Williams' Goal -->
+    <div class="slide" id="slide11">
+        <div class="slide-content">
+            <div class="mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Your <span class="accent-text">$1 Million</span> Goal</h2>
+                <div class="w-24 h-1 bg-purple-500 mb-8"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <div class="feature-card h-full">
+                        <h3 class="text-2xl font-semibold mb-4">The Target</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-dollar-sign text-xl text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-semibold">$1,000,000 Revenue</h4>
+                                    <p>Over the next 24 months</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-tshirt text-xl text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-semibold">Best-Selling Piece</h4>
+                                    <p>Focusing on your $147 signature item</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-shopping-cart text-xl text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-semibold">6,803 Units</h4>
+                                    <p>Total sales needed to reach $1M</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="feature-card h-full">
+                        <h3 class="text-2xl font-semibold mb-4">Our AI-Powered Approach</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-chart-line text-xl text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-semibold">Data-Driven Strategy</h4>
+                                    <p>Using AI to identify the most efficient path to your sales goal</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-bullseye text-xl text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-semibold">Targeted Marketing</h4>
+                                    <p>Precision-targeting your ideal customers to maximize conversion</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-robot text-xl text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-semibold">AI-Optimized Sales Funnel</h4>
+                                    <p>Creating a seamless journey from awareness to purchase</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center">
+                <p class="text-xl font-semibold">Our comprehensive AI solution is specifically designed to help you reach this $1M goal efficiently and effectively.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 12: Key Recommendations -->
+    <div class="slide" id="slide12">
+        <div class="slide-content">
+            <div class="mt-12 mb-8"> <!-- Added top margin to push title down -->
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Key <span class="accent-text">Recommendations</span></h2>
+                <div class="w-24 h-1 bg-purple-500 mb-8"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6"> <!-- Reduced gap from 8 to 6 -->
+                <div class="space-y-4"> <!-- Reduced space-y from 6 to 4 -->
+                    <div class="feature-card">
+                        <div class="text-center text-4xl text-purple-600 font-bold mb-2">1</div> <!-- Reduced mb-3 to mb-2 -->
+                        <h3 class="text-xl font-semibold mb-2 text-center">Prioritize AI-Generated Video Content</h3> <!-- Reduced mb-3 to mb-2 -->
+                        <p class="text-sm">The transformational aspect of your designs is highly visual and perfect for AI-generated short-form videos that demonstrate multiple styles efficiently.</p> <!-- Added text-sm class -->
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="text-center text-4xl text-purple-600 font-bold mb-2">2</div>
+                        <h3 class="text-xl font-semibold mb-2 text-center">SEO-Optimized Blogging</h3>
+                        <p class="text-sm">Establish topical authority through strategic AI-written blog content that drives organic traffic and positions you as an industry leader.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="text-center text-4xl text-purple-600 font-bold mb-2">3</div>
+                        <h3 class="text-xl font-semibold mb-2 text-center">Social Media Content Management</h3>
+                        <p class="text-sm">Create unified messaging across all platforms with AI-generated content that maintains brand consistency while maximizing engagement.</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4"> <!-- Reduced space-y from 6 to 4 -->
+                    <div class="feature-card">
+                        <div class="text-center text-4xl text-purple-600 font-bold mb-2">4</div>
+                        <h3 class="text-xl font-semibold mb-2 text-center">Implement AI Transformation Guides</h3>
+                        <p class="text-sm">Create AI-powered, comprehensive, easy-to-follow guides showing exactly how to achieve each look transformation.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="text-center text-4xl text-purple-600 font-bold mb-2">5</div>
+                        <h3 class="text-xl font-semibold mb-2 text-center">Ad Creatives & Marketing Verbiage</h3>
+                        <p class="text-sm">Develop tailor-made advertising content specifically designed to close sales and maximize your return on ad spend.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="text-center text-4xl text-purple-600 font-bold mb-2">6</div>
+                        <h3 class="text-xl font-semibold mb-2 text-center">Focus on Best-Selling Product</h3>
+                        <p class="text-sm">Concentrate marketing efforts on your $147 signature piece to efficiently reach your $1 million revenue goal through targeted sales.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 13: Pricing -->
+    <div class="slide" id="slide13">
+        <div class="slide-content">
+            <div class="mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Investment & <span class="primary-text">Value</span></h2>
+                <div class="w-24 h-1 bg-indigo-600 mb-8"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="feature-card mb-8">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl font-bold">Premium AI Marketing Package</h3>
+                        <p class="text-lg text-gray-600">Designed to help you reach your $1 million revenue goal</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+                        <div>
+                            <h4 class="text-xl font-semibold mb-4">Investment Structure</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-center justify-between p-3 bg-indigo-50 rounded-lg">
+                                    <span class="font-semibold">Initial Retainer</span>
+                                    <span class="text-xl font-bold text-indigo-600">$5,000</span>
+                                </li>
+                                <li class="flex items-center justify-between p-3 bg-indigo-50 rounded-lg">
+                                    <span class="font-semibold">Monthly Fee (13 months)</span>
+                                    <span class="text-xl font-bold text-indigo-600">$2,500</span>
+                                </li>
+                                <li class="flex items-center justify-between p-3 bg-indigo-50 rounded-lg">
+                                    <span class="font-semibold">Total Investment</span>
+                                    <span class="text-xl font-bold text-indigo-600">$37,500</span>
+                                </li>
+                                <li class="flex items-center justify-between p-3 bg-purple-50 rounded-lg">
+                                    <span class="font-semibold">Expected ROI</span>
+                                    <span class="text-xl font-bold text-purple-600">2,566%</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xl font-semibold mb-4">What's Included</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                                    <div>
+                                        <span class="font-semibold">SEO-Optimized Blogging</span>
+                                        <span class="block text-sm text-gray-500">Market Value: $3,000/month</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                                    <div>
+                                        <span class="font-semibold">Social Media Content Management</span>
+                                        <span class="block text-sm text-gray-500">Market Value: $2,500/month</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                                    <div>
+                                        <span class="font-semibold">Ad Creative Development</span>
+                                        <span class="block text-sm text-gray-500">Market Value: $2,000/month</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                                    <div>
+                                        <span class="font-semibold">AI-Generated Video Content</span>
+                                        <span class="block text-sm text-gray-500">Market Value: $3,500/month</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                                    <div>
+                                        <span class="font-semibold">Ad Spend Management</span>
+                                        <span class="block text-sm text-gray-500">Market Value: $1,500/month</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-indigo-600 mt-1 mr-2"></i>
+                                    <div>
+                                        <span class="font-semibold">Sales Funnel Optimization</span>
+                                        <span class="block text-sm text-gray-500">Market Value: $2,000/month</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="text-xl font-semibold mb-2">Total Market Value: <span class="text-indigo-600">$14,500/month</span></h4>
+                        <p class="text-lg">Your investment of $2,500/month represents a <span class="font-bold text-indigo-600">83% savings</span> compared to market rates for these services.</p>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <p class="text-xl mb-6">This comprehensive package includes everything you need to reach your $1 million revenue goal, including the cost of ads.</p>
+                    <p class="mb-4">We'll discuss this package in detail during our follow-up meeting on <span class="font-bold">Wednesday, April 23, 2025 at 3:00 PM</span></p>
+                    <a href="#" class="btn-primary text-lg px-8 py-4">
+                        Confirm Your Interest
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 14: Next Steps -->
+    <div class="slide" id="slide14">
+        <div class="slide-content">
+            <div class="mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Next <span class="primary-text">Steps</span></h2>
+                <div class="w-24 h-1 bg-indigo-600 mb-8"></div>
+            </div>
+
+            <div class="max-w-5xl mx-auto">
+                <!-- Two-column grid layout for timeline items -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                    <!-- Left Column -->
+                    <div class="space-y-4">
+                        <div class="timeline-item">
+                            <h3 class="text-xl font-semibold mb-1">1. Initial Strategy Session <span class="text-green-600">(Completed)</span></h3>
+                            <p class="mb-2 text-sm">We've conducted our initial discovery session to understand your goals, challenges, and vision for AC WILLIAM.</p>
+                            <p class="italic text-sm">Deliverable: Customized AI Strategy Blueprint</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <h3 class="text-xl font-semibold mb-1">2. Follow-Up Strategy Meeting <span class="text-indigo-600">(Scheduled)</span></h3>
+                            <p class="mb-2 text-sm">Our next meeting is scheduled for <span class="font-bold">Wednesday, April 23, 2025 at 3:00 PM</span> to review our initial findings and refine our approach.</p>
+                            <p class="italic text-sm">Deliverable: Finalized Implementation Plan</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <h3 class="text-xl font-semibold mb-1">3. AI Assessment</h3>
+                            <p class="mb-2 text-sm">Our team will perform a comprehensive analysis of your current digital presence, identifying key AI implementation opportunities.</p>
+                            <p class="italic text-sm">Deliverable: AI Opportunity Report</p>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="space-y-4">
+                        <div class="timeline-item">
+                            <h3 class="text-xl font-semibold mb-1">4. Solution Design Workshop</h3>
+                            <p class="mb-2 text-sm">Collaborative session to develop transformation showcase concepts and visual storytelling approaches using our AI tools.</p>
+                            <p class="italic text-sm">Deliverable: AI Implementation Plan</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <h3 class="text-xl font-semibold mb-1">5. Pilot Program Development</h3>
+                            <p class="mb-2 text-sm">Begin with a focused 30-day AI implementation to demonstrate quick wins and establish momentum.</p>
+                            <p class="italic text-sm">Deliverable: Initial AI Content Suite</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <h3 class="text-xl font-semibold mb-1">6. Full Launch Preparation</h3>
+                            <p class="mb-2 text-sm">Finalize comprehensive AI strategy implementation timeline and prepare for full-scale launch.</p>
+                            <p class="italic text-sm">Deliverable: Launch Timeline & Metrics Dashboard</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 text-center">
+                    <p class="mb-2 text-sm">Your follow-up meeting is already scheduled for <span class="font-bold">Wednesday, April 23, 2025 at 3:00 PM</span></p>
+                    <a href="https://calendly.com/admin-nfluency/new-meeting" class="btn-primary btn-sm" target="_blank">
+                        Reschedule If Needed
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 15: Contact -->
+    <div class="slide" id="slide15">
+        <div class="slide-content">
+            <div class="mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Let's <span class="primary-text">Connect</span></h2>
+                <div class="w-24 h-1 bg-indigo-600 mb-8"></div>
+            </div>
+
+            <div class="max-w-3xl mx-auto text-center">
+                <p class="text-xl mb-8">Ready to transform your fashion business with AI-powered solutions? We're excited to help you elevate AC WILLIAM's brand to new heights.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div class="feature-card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-calendar-alt text-4xl text-indigo-600"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Schedule a Discovery Call</h3>
+                        <p class="mb-4">Book a personalized session to discuss your specific needs and how our AI solutions can help.</p>
+                        <a href="https://calendly.com/admin-nfluency/new-meeting" class="btn-primary" target="_blank">
+                            Book Now
+                        </a>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-envelope text-4xl text-indigo-600"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Contact Information</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center justify-center">
+                                <i class="fas fa-envelope text-indigo-600 mr-2"></i>
+                                <a href="mailto:admin@nfluency.com" class="hover:text-indigo-600 transition-colors">admin@nfluency.com</a>
+                            </li>
+                            <li class="flex items-center justify-center">
+                                <i class="fas fa-phone text-indigo-600 mr-2"></i>
+                                <a href="tel:+16615027927" class="hover:text-indigo-600 transition-colors">(661) 502-7927</a>
+                            </li>
+                            <li class="flex items-center justify-center">
+                                <i class="fas fa-globe text-indigo-600 mr-2"></i>
+                                <a href="http://nfluency.com" target="_blank" class="hover:text-indigo-600 transition-colors">nfluency.com</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6">NFLUENCY</h3>
+                    <p class="text-xl italic">Transforming Fashion Businesses Through Strategic AI Solutions</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 16: Thank You -->
+    <div class="slide gradient-bg" id="slide16">
+        <div class="slide-content">
+            <div class="text-center">
+                <h2 class="text-4xl md:text-6xl font-bold mb-8">Thank You For Your Consideration</h2>
+                <div class="w-24 h-1 bg-white mx-auto mb-8"></div>
+                <p class="text-xl md:text-2xl mb-8">We look forward to transforming your fashion business with AI</p>
+                <button id="returnToStartBtn" class="bg-white text-indigo-600 hover:bg-indigo-100 transition-colors px-6 py-3 rounded-full font-semibold shadow-lg">
+                    <i class="fas fa-redo mr-2"></i> Return to Start
+                </button>
+            </div>
+        </div>
+    </div>
+
+    </div><!-- End of slides-container -->
+
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" aria-label="Previous slide">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="nav-btn" id="nextBtn" aria-label="Next slide">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <!-- Progress is shown in the top bar -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const progressBar = document.getElementById('progressBar');
+            let currentSlide = 0;
+
+            // Make sure we have valid elements
+            if (!slides || !prevBtn || !nextBtn || !progressBar) {
+                console.error('Missing required elements');
+                return;
+            }
+
+            // Initialize progress bar
+            progressBar.value = 0;
+            progressBar.max = 100;
+
+            // Add event listener for the return to start button
+            const returnToStartBtn = document.getElementById('returnToStartBtn');
+            if (returnToStartBtn) {
+                returnToStartBtn.addEventListener('click', function() {
+                    currentSlide = 0;
+                    showSlide(currentSlide);
+                });
+            }
+
+            // Fade transition is hard-coded as the default effect
+
+            function showSlide(index) {
+                // Validate index
+                if (index < 0 || index >= slides.length) {
+                    console.error('Invalid slide index:', index);
+                    return;
+                }
+
+                // Get the current active slide
+                const currentActiveSlide = document.querySelector('.slide.active');
+
+                // If there's an active slide and it's not the one we're trying to show
+                if (currentActiveSlide && currentActiveSlide !== slides[index]) {
+                    // Remove active class from current slide
+                    currentActiveSlide.classList.remove('active');
+                }
+
+                // Force a reflow to ensure the transition is triggered
+                slides[index].getBoundingClientRect();
+
+                // Add active class to the new slide
+                slides[index].classList.add('active');
+
+                // No indicators to update - using progress bar instead
+
+                // Update progress bar
+                const progress = (index / (slides.length - 1)) * 100;
+                progressBar.value = Math.round(progress);
+            }
+
+            // Previous button click handler
+            prevBtn.addEventListener('click', function() {
+                currentSlide = Math.max(0, currentSlide - 1);
+                showSlide(currentSlide);
+            });
+
+            // Next button click handler
+            nextBtn.addEventListener('click', function() {
+                currentSlide = Math.min(slides.length - 1, currentSlide + 1);
+                showSlide(currentSlide);
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowLeft') {
+                    currentSlide = Math.max(0, currentSlide - 1);
+                    showSlide(currentSlide);
+                } else if (e.key === 'ArrowRight') {
+                    currentSlide = Math.min(slides.length - 1, currentSlide + 1);
+                    showSlide(currentSlide);
+                }
+            });
+
+            // Enhanced touch events for swipe support
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let touchEndX = 0;
+            let touchEndY = 0;
+            let touchStartTime = 0;
+
+            document.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+                touchStartY = e.changedTouches[0].screenY;
+                touchStartTime = new Date().getTime();
+            }, { passive: true });
+
+            document.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                touchEndY = e.changedTouches[0].screenY;
+                handleSwipe();
+            }, { passive: true });
+
+            function handleSwipe() {
+                const swipeThreshold = Math.max(30, window.innerWidth * 0.05); // Responsive threshold
+                const swipeTime = new Date().getTime() - touchStartTime;
+                const verticalDistance = Math.abs(touchEndY - touchStartY);
+                const horizontalDistance = Math.abs(touchEndX - touchStartX);
+
+                // Only detect horizontal swipes (ignore vertical scrolling)
+                if (horizontalDistance > verticalDistance && horizontalDistance > swipeThreshold && swipeTime < 300) {
+                    if (touchEndX < touchStartX) {
+                        // Swipe left - go to next slide
+                        currentSlide = Math.min(slides.length - 1, currentSlide + 1);
+                        showSlide(currentSlide);
+                    } else {
+                        // Swipe right - go to previous slide
+                        currentSlide = Math.max(0, currentSlide - 1);
+                        showSlide(currentSlide);
+                    }
+                }
+            }
+
+            // Initialize
+            showSlide(currentSlide);
+        });
+    </script>
+</body>
+</html>
